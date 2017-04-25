@@ -1,0 +1,23 @@
+<{extends file='base/base.html'}>
+<{block name=title}><{$title}><{/block}>
+<{block name=body}>
+<form action="/main/content" method="POST" style="width: 200px;">
+    <div class="form-group">类型
+        <select class="form-control" name="nrtype">
+            <option value="">全部</option>
+            <option value="tv" <{if $nrtype == 'tv'}>selected="selected"<{/if}>>电视剧</option>
+            <option value="movie" <{if $nrtype == 'movie'}>selected="selected"<{/if}>>电影</option>
+            <option value="show" <{if $nrtype == 'show'}>selected="selected"<{/if}>>综艺</option>
+            <option value="comic" <{if $nrtype == 'comic'}>selected="selected"<{/if}>>动漫</option>
+        </select>
+    </div>
+    <div class="form-group">来源
+        <select class="form-control" name="source">
+            <option value="">全部</option>
+            <option value="outside" <{if $source == 'outside'}>selected="selected"<{/if}>>外来片源</option>
+            <option value="inside" <{if $source == 'inside'}>selected="selected"<{/if}>>自制</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-default">搜索</button>
+</form>
+<{/block}>
