@@ -8,19 +8,23 @@ class Register_model extends CI_Model {
     }
     public function getRegisterList($username,$nickname,$password,$email)
     {
-        if(($username != " ") && ($nickname != " ") && ($password != "")){
-            $sql = "SELECT password_hash FROM user WHERE username = ".$username." OR nickname = ".$nickname;
-            $judge = $this->db->query($sql);
-            if($judge != NULL){
+        $this->load->helper('date');
+        $time =  now();
+        $where = "username = '".$username."' OR nickname = '".$nickname."'";
+        if(($username != "") && ($nickname != "") && ($password != "")){
+            $this->db->select('nickname');
+            $judge = $this->db->get_where('user',$where,0,0);
+            $row = $judge->row();
+            if(($row == NULL)){
                 $sql = "INSERT INTO user VALUES(NULL,'0','0','"
-                    .$username."','".$password."','".$email."','".$nickname."','1','1')";
+                    .$username."','".$password."','".$email."','".$nickname."','".$time."','".$time."')";
                 $this->db->query($sql);
             }else{
-                return false;
+                return "用户名已被注册，请重新输入！";
             }
-            return true;
+            return "恭喜您已成功注册！";
         }else{
-            return false;
+            return "";
         }
     }
 }

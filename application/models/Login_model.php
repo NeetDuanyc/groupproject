@@ -10,19 +10,22 @@ class Login_model extends CI_Model {
     {
         $true = "true";
         $false = "false";
-        $where = "username = ".$userornick." OR nickname = ".$userornick;
-        if(($userornick != " ")&&($password != "")){
+        $where = "username = '".$userornick."' OR nickname = '".$userornick."'";
+        if(($userornick != '')&&($password != '')){
             $this->db->select('password_hash');
             $result = $this->db->get_where('user',$where,0,0);
-            //$sql = "SELECT password_hash FROM user WHERE username = ".$userornick." OR nickname = ".$userornick;
-            //$result = $this->db->get($sql);
-            if($password == $result){
-                return $true;
+            $row = $result->row();
+            if($row == null){
+                return "用户名不存在";
             }else{
-                return $false;
+                if($password == $row->password_hash){
+                    return $true;
+                }else if($password != $row->password_hash){
+                    return $false;
+                }
             }
         }else{
-            return $false."b";
+            return '';
         }
     }
 }

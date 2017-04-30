@@ -13,6 +13,10 @@ class Main extends Base_Controller {
     }
 
     public function main(){
+        $this->load->library('session');
+
+        $user = $this->session->userdata('user');
+        echo "尊敬的用户".$user."，请选择您需要的功能：<br>";
         $this->smarty->assign('title','用户中心');
         $this->smarty->display('main/main.html');
     }

@@ -16,6 +16,6 @@ class User extends Base_Controller
     }
     public function check(){
         $this->smarty->assign('title','查看已发布的调查问卷');
-        $this->smarty->assign('user/check.html');
+        $this->smarty->display('user/check.html');
     }
 }

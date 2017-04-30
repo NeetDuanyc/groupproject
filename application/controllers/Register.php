@@ -19,9 +19,8 @@ class Register extends Base_Controller
         $this->load->model('register_model');
 
         $result = $this->register_model->getRegisterList($username,$nickname,$password,$email);
-
+        echo $result;
         $this->smarty->assign('title', '注册');
-        $this->smarty->assign('result',$result);
         $this->smarty->display('register/register.html');
     }
 }
